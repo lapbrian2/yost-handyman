@@ -3,12 +3,12 @@ useHead({ title: 'Portfolio — Yost Handyman Services' })
 
 const currentProject = ref(0)
 const projects = [
-  { name: 'Kitchen Renovation', type: 'Renovation', before: '/images/filler/kitchen.jpg', after: '/images/filler/kitchen.jpg' },
-  { name: 'Deck Restoration', type: 'Outdoor', before: '/images/filler/deck.jpg', after: '/images/filler/deck.jpg' },
-  { name: 'Bathroom Remodel', type: 'Renovation', before: '/images/filler/bathroom.jpg', after: '/images/filler/bathroom.jpg' },
-  { name: 'Fence Painting', type: 'Outdoor', before: '/images/filler/fence.jpg', after: '/images/filler/fence.jpg' },
-  { name: 'Pressure Washing', type: 'Exterior', before: '/images/filler/pressure.jpg', after: '/images/filler/pressure.jpg' },
-  { name: 'Lighting Upgrade', type: 'Interior', before: '/images/filler/electrical.jpg', after: '/images/filler/electrical.jpg' },
+  { name: 'Kitchen Renovation', type: 'Renovation', before: '/images/yost/yost-1.jpg', after: '/images/yost/yost-1.jpg' },
+  { name: 'Deck Restoration', type: 'Outdoor', before: '/images/yost/yost-1.jpg', after: '/images/yost/yost-1.jpg' },
+  { name: 'Bathroom Remodel', type: 'Renovation', before: '/images/yost/yost-1.jpg', after: '/images/yost/yost-1.jpg' },
+  { name: 'Fence Painting', type: 'Outdoor', before: '/images/yost/yost-1.jpg', after: '/images/yost/yost-1.jpg' },
+  { name: 'Pressure Washing', type: 'Exterior', before: '/images/yost/yost-1.jpg', after: '/images/yost/yost-1.jpg' },
+  { name: 'Lighting Upgrade', type: 'Interior', before: '/images/yost/yost-1.jpg', after: '/images/yost/yost-1.jpg' },
 ]
 
 const next = () => { currentProject.value = (currentProject.value + 1) % projects.length }

@@ -25,7 +25,7 @@ const handleSubmit = () => {
     <section class="c-contact">
       <div class="contact-bg">
         <img
-          src="/images/filler/hero.jpg"
+          src="/images/yost/yost-1.jpg"
           alt=""
           loading="lazy"
         >

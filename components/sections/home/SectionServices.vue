@@ -2,12 +2,12 @@
 const currentSlide = ref(0)
 
 const services = [
-  { name: 'Appliance Installation', desc: 'Expert installation of household appliances, ensuring proper fit and function.', img: '/images/filler/appliance.jpg' },
-  { name: 'Plumbing Repair', desc: 'Quick and efficient plumbing repairs to keep your home running smoothly.', img: '/images/filler/plumbing.jpg' },
-  { name: 'Interior Painting', desc: 'Transform any room with professional, clean painting services.', img: '/images/filler/painting.jpg' },
-  { name: 'Deck Restoration', desc: 'Repair, stain, and restore your deck to its original beauty.', img: '/images/filler/deck.jpg' },
-  { name: 'Door & Window Repair', desc: 'Fix drafty doors and windows for better comfort and efficiency.', img: '/images/filler/doors.jpg' },
-  { name: 'Pressure Washing', desc: 'Restore surfaces to like-new condition with professional pressure washing.', img: '/images/filler/pressure.jpg' },
+  { name: 'Appliance Installation', desc: 'Expert installation of household appliances, ensuring proper fit and function.', img: '/images/yost/yost-1.jpg' },
+  { name: 'Plumbing Repair', desc: 'Quick and efficient plumbing repairs to keep your home running smoothly.', img: '/images/yost/yost-2.jpg' },
+  { name: 'Interior Painting', desc: 'Transform any room with professional, clean painting services.', img: '/images/yost/yost-1.jpg' },
+  { name: 'Deck Restoration', desc: 'Repair, stain, and restore your deck to its original beauty.', img: '/images/yost/yost-2.jpg' },
+  { name: 'Door & Window Repair', desc: 'Fix drafty doors and windows for better comfort and efficiency.', img: '/images/yost/yost-1.jpg' },
+  { name: 'Pressure Washing', desc: 'Restore surfaces to like-new condition with professional pressure washing.', img: '/images/yost/yost-2.jpg' },
 ]
 
 const next = () => { currentSlide.value = (currentSlide.value + 1) % services.length }

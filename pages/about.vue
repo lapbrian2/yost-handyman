@@ -22,7 +22,7 @@ useScrollProgress(archSection, { start: 'top bottom', end: 'bottom top' })
         <div class="arch">
           <div class="arch-inner">
             <img
-              src="/images/filler/electrical.jpg"
+              src="/images/yost/yost-1.jpg"
               alt="Yost Handyman Services"
               loading="lazy"
             >
@@ -52,7 +52,7 @@ useScrollProgress(archSection, { start: 'top bottom', end: 'bottom top' })
 
         <div class="area-map">
           <img
-            src="/images/filler/workshop.jpg"
+            src="/images/yost/yost-1.jpg"
             alt="Service area map"
             loading="lazy"
           >
