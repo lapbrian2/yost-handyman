@@ -1,0 +1,155 @@
+/* ═══════════════════════════════════════════════
+   BASE — Reset, Fonts, Root Variables
+   Derived from Obsidian Assembly source
+   ═══════════════════════════════════════════════ */
+
+@property --progress {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+
+:root {
+  /* ── Colors ── */
+  --c-black: #151415;
+  --c-black-rgb: 21, 20, 21;
+  --c-yellow: #F1EADE;
+  --c-yellow-rgb: 241, 234, 222;
+  --c-white: #FFF;
+  --c-white-rgb: 255, 255, 255;
+  --c-brown: #7B5136;
+  --c-brown-rgb: 123, 81, 54;
+  --c-grey: #3F383C;
+  --c-grey-rgb: 63, 56, 60;
+  --c-stone: #242324;
+  --c-stone-rgb: 36, 35, 36;
+  --c-red: #FF5113;
+  --c-red-rgb: 255, 81, 19;
+
+  /* ── Easing ── */
+  --f-cubic: cubic-bezier(0.35, 0.35, 0, 1);
+  --f-cubic-in: cubic-bezier(0.69, 0, 0, 1);
+  --f-fast: cubic-bezier(0.2, 0.75, 0.35, 1);
+  --f-smooth: cubic-bezier(0.5, 0, 0.3, 1);
+  --f-bounce: cubic-bezier(0.6, 0.5, 0, 3);
+
+  /* ── Fonts ── */
+  --font-display: "Playfair Display", "Georgia", serif;
+  --font-heading: "Cormorant Garamond", "Georgia", serif;
+  --font-body: "Inter", system-ui, -apple-system, sans-serif;
+
+  /* for reference compat */
+  --font-t-1: var(--font-heading);
+  --font-t-2: var(--font-display);
+  --font-b-regular: var(--font-body);
+  --font-b-medium: var(--font-body);
+
+  /* ── Safe area ── */
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* ── Reset ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  margin: 0;
+}
+
+ol, ul, ol *, ul * {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+figure {
+  margin: 0;
+}
+
+img, svg, video {
+  display: block;
+  width: 100%;
+}
+
+a {
+  color: var(--c-white);
+  text-decoration: none;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  color: var(--c-white);
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: var(--body-font-size);
+  line-height: var(--body-line-height);
+  margin: 0;
+  padding: 0;
+  touch-action: manipulation;
+}
+
+button, button span {
+  display: block;
+  position: relative;
+}
+
+input, textarea {
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: inset 0 0 0 2px var(--c-black);
+  color: var(--c-black);
+  cursor: text;
+  display: block;
+  font-family: var(--font-body);
+  font-size: 16px;
+  margin: 0;
+  padding: 0.4rem;
+}
+
+input:focus, textarea:focus {
+  outline: none;
+}
+
+input::placeholder, textarea::placeholder {
+  color: rgba(var(--c-grey-rgb), 0.5);
+  opacity: 1;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px var(--c-black) inset;
+  -webkit-text-fill-color: var(--c-white) !important;
+  background-color: var(--c-black) !important;
+}
+
+/* ── Global ── */
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: var(--c-black);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: var(--body-line-height, 1.3);
+  text-rendering: optimizeLegibility;
+  overflow-anchor: none;
+}
+
+body, html {
+  background-color: var(--c-black);
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+}
+
+/* ── Selection ── */
+::selection {
+  background-color: rgba(var(--c-yellow-rgb), 0.3);
+  color: var(--c-white);
+}

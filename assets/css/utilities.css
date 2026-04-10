@@ -1,0 +1,59 @@
+/* ═══════════════════════════════════════════════
+   UTILITIES
+   ═══════════════════════════════════════════════ */
+
+.-dn { display: none; }
+
+.-fit {
+  position: relative;
+}
+.-fit img {
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  width: 100%;
+  inset: 0;
+}
+
+/* Checkbox custom styling */
+.checkbox-wrap {
+  align-items: flex-start;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.checkbox-wrap input {
+  -webkit-appearance: none;
+  cursor: pointer;
+  flex-shrink: 0;
+  height: var(--p);
+  left: 0;
+  margin: 0;
+  opacity: 0;
+  padding: 0;
+  pointer-events: all;
+  position: absolute;
+  top: 0;
+  width: var(--p);
+  z-index: 100;
+}
+
+.checkbox-wrap .checkmark {
+  align-items: center;
+  background-color: rgba(var(--c-white-rgb), 0.4);
+  border-radius: 0.2rem;
+  box-shadow: 0 0.2rem 0.4rem rgba(var(--c-black-rgb), 0.15);
+  display: inline-flex;
+  flex-shrink: 0;
+  height: var(--p);
+  justify-content: center;
+  margin-right: 0.5rem;
+  pointer-events: none;
+  transition: background-color 1.2s var(--f-cubic);
+  width: var(--p);
+}
+
+.checkbox-wrap input:checked ~ .checkmark {
+  background-color: rgba(var(--c-white-rgb), 1);
+}

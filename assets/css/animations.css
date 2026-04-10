@@ -1,0 +1,195 @@
+/* ═══════════════════════════════════════════════
+   ANIMATIONS — Entrance, Split Text, Transitions
+   Exact easing curves from Obsidian Assembly
+   ═══════════════════════════════════════════════ */
+
+/* ── Scroll entrance: slide up / down ── */
+.-a-to-top,
+.-a-to-bottom {
+  --l-modifier: 1;
+  --l-delay: 0;
+  transform: translateZ(0);
+}
+
+.-a-to-top {
+  opacity: 0;
+  translate: 0 var(--h5);
+  transition: translate 0.3s var(--f-cubic), opacity 0.3s var(--f-cubic);
+}
+
+.-a-to-bottom {
+  opacity: 0;
+  translate: 0 calc(var(--h5) * -1);
+  transition: translate 0.3s var(--f-cubic), opacity 0.3s var(--f-cubic);
+}
+
+.-a-to-top.-inview,
+.-a-to-bottom.-inview,
+.-inview .-a-to-top,
+.-inview .-a-to-bottom {
+  opacity: 1;
+  translate: 0 0;
+  transition: translate 1.5s var(--f-cubic), opacity 1.5s var(--f-cubic);
+  transition-delay: calc(var(--l-delay) * 1s + 0.15s);
+}
+
+/* ── Onload visibility ── */
+.-onload {
+  visibility: hidden;
+}
+html.-loaded .-onload {
+  visibility: visible;
+}
+
+/* ── Splitted text system ── */
+.-splitted {
+  --l-delay: 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.-splitted .-s-line {
+  clip-path: inset(0 0 100% 0);
+  display: flex;
+  transform: translateZ(0);
+  translate: 0 3em;
+  will-change: contents;
+}
+
+.-splitted .-s-char,
+.-splitted .-s-word {
+  display: inline-flex;
+  will-change: contents;
+}
+
+/* Large display char animation (blur + skew + scale) */
+.-lrg .-splitted .-s-char,
+.-lrg.-splitted .-s-char {
+  --dx: 0.25;
+  --dy: 1.0;
+  filter: blur(0.05em);
+  margin: -0.25em calc(-0.1em + var(--kerning, 0px)) -0.25em -0.1em !important;
+  opacity: 0;
+  padding: 0.25em 0.1em;
+  scale: 2;
+  transform: translateZ(0) skew(15deg, 30deg);
+  translate: calc(var(--dx, 0.25) * 1em) calc(var(--dy, 1) * 1em);
+}
+
+/* Line reveal on inview */
+html.-loaded .-splitted.-inview .-s-line {
+  clip-path: inset(-10% 0 -10% 0);
+  transition: translate 1.5s var(--f-cubic), clip-path 1.5s var(--f-cubic);
+  transition-delay: calc(var(--line-index) * 75ms + var(--l-delay) * 0.15s);
+  translate: 0 0;
+}
+
+/* Char reveal on inview */
+html.-loaded .-lrg .-splitted.-inview .-s-char,
+html.-loaded .-lrg.-splitted.-inview .-s-char {
+  filter: blur(0);
+  opacity: 1;
+  scale: 1;
+  transform: translateZ(0) skew(0deg, 0deg);
+  transition:
+    opacity 1.5s var(--f-fast),
+    scale 1.5s var(--f-fast),
+    translate 1.5s var(--f-fast),
+    transform 1.5s var(--f-fast),
+    filter 1.5s var(--f-fast);
+  transition-delay: calc(var(--char-random) * 75ms);
+  translate: 0 0;
+}
+
+/* ── Lazy load ── */
+.lazyLoad {
+  opacity: 0;
+  transform: translateZ(0);
+  transition: opacity 1.2s var(--f-cubic);
+}
+.lazyLoad.-loaded {
+  opacity: 1;
+}
+
+/* ── Page transition stripes ── */
+.page-transition {
+  background-color: rgba(var(--c-grey-rgb), 1);
+  height: calc(var(--vh, 1vh) * 100);
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 200;
+  transform: translateZ(0);
+}
+
+.page-transition .g {
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  inset: 0;
+  position: absolute;
+}
+
+.page-transition .g > span {
+  background-color: var(--c-black);
+  box-shadow: 0 0 0 1px var(--c-black);
+  display: block;
+  height: 25%;
+  scale: 1 1;
+  transform: translateZ(0);
+  width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .page-transition .g > span {
+    background-color: var(--c-yellow);
+    box-shadow: 0 0 0 1px var(--c-yellow);
+  }
+}
+
+.page-transition .t {
+  color: var(--c-white);
+  display: grid;
+  inset: 50lvh 0 auto 0;
+  position: absolute;
+}
+
+.page-transition .t > span {
+  grid-area: 1/1;
+  justify-self: center;
+  overflow: hidden;
+}
+
+@media (min-width: 1024px) {
+  .page-transition .t {
+    color: var(--c-black);
+  }
+}
+
+/* Page transition enter */
+.page-enter-active {
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  transition-duration: 1.2s;
+}
+
+.page-leave-active {
+  transition-duration: 1.2s;
+}
+
+.page-enter-from {
+  opacity: 0;
+}
+
+.page-leave-to {
+  opacity: 0;
+}
+
+/* ── Repeat inview (for scroll-driven sections) ── */
+.-s-p-repeat:not(.-inview) .-splitted .-s-line {
+  clip-path: inset(0 0 100% 0);
+  transition-delay: 0s;
+  translate: 0 6em;
+}

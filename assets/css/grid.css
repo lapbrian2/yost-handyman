@@ -1,0 +1,58 @@
+/* ═══════════════════════════════════════════════
+   GRID — 6/12 Column System
+   Matching Obsidian Assembly .-gc pattern
+   ═══════════════════════════════════════════════ */
+
+:root {
+  --g-columns: 6;
+  --columns: 6;
+  --g-gap: var(--p);
+  --g-margin: calc(var(--g-gap) * 1);
+  --col: calc(var(--vw, 1vw) * 100 / 6 - var(--g-margin) * 2 / 6 - var(--g-gap) * 5 / 6);
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --g-columns: 12;
+    --columns: 12;
+    --g-margin: calc(var(--g-gap) * 2);
+    --col: calc(var(--vw, 1vw) * 100 / 12 - var(--g-margin) * 2 / 12 - var(--g-gap) * 11 / 12);
+  }
+}
+
+/* Grid component */
+.-gc {
+  grid-column-gap: var(--g-gap);
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: repeat(var(--columns), 1fr);
+  grid-template-rows: repeat(var(--rows, 1), var(--rowsHeight, auto));
+  position: relative;
+}
+
+.-gc > * {
+  --left: 1;
+  --top: 1;
+  --width: 1;
+  --height: 1;
+  grid-column-end: calc(var(--left, 1) + var(--width, 1));
+  grid-column-start: var(--left, 1);
+  grid-row-end: calc(var(--top, 1) + var(--height, 1));
+  grid-row-start: var(--top, 1);
+}
+
+/* Wrapper */
+.-w {
+  margin: 0 var(--g-margin);
+}
+
+/* Page container */
+.page {
+  contain: paint;
+  min-height: calc(var(--vh, 1vh) * 100);
+  will-change: scroll-position;
+}
+
+section {
+  position: relative;
+}
