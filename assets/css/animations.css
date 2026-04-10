@@ -1,195 +1,88 @@
 /* ═══════════════════════════════════════════════
-   ANIMATIONS — Entrance, Split Text, Transitions
-   Exact easing curves from Obsidian Assembly
+   ANIMATIONS — CSS-driven scroll entrances
+   IntersectionObserver adds .is-visible class
+   GSAP handles only scrub/parallax
    ═══════════════════════════════════════════════ */
 
-/* ── Scroll entrance: slide up / down ── */
-.-a-to-top,
-.-a-to-bottom {
-  --l-modifier: 1;
-  --l-delay: 0;
-  transform: translateZ(0);
-}
-
-.-a-to-top {
+/* ── Scroll-triggered entrance: fade up ── */
+.animate-on-scroll {
   opacity: 0;
-  translate: 0 var(--h5);
-  transition: translate 0.3s var(--f-cubic), opacity 0.3s var(--f-cubic);
-}
-
-.-a-to-bottom {
-  opacity: 0;
-  translate: 0 calc(var(--h5) * -1);
-  transition: translate 0.3s var(--f-cubic), opacity 0.3s var(--f-cubic);
-}
-
-.-a-to-top.-inview,
-.-a-to-bottom.-inview,
-.-inview .-a-to-top,
-.-inview .-a-to-bottom {
-  opacity: 1;
-  translate: 0 0;
-  transition: translate 1.5s var(--f-cubic), opacity 1.5s var(--f-cubic);
-  transition-delay: calc(var(--l-delay) * 1s + 0.15s);
-}
-
-/* ── Onload visibility ── */
-.-onload {
-  visibility: hidden;
-}
-html.-loaded .-onload {
-  visibility: visible;
-}
-
-/* ── Splitted text system ── */
-.-splitted {
-  --l-delay: 0;
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.-splitted .-s-line {
-  clip-path: inset(0 0 100% 0);
-  display: flex;
-  transform: translateZ(0);
-  translate: 0 3em;
-  will-change: contents;
-}
-
-.-splitted .-s-char,
-.-splitted .-s-word {
-  display: inline-flex;
-  will-change: contents;
-}
-
-/* Large display char animation (blur + skew + scale) */
-.-lrg .-splitted .-s-char,
-.-lrg.-splitted .-s-char {
-  --dx: 0.25;
-  --dy: 1.0;
-  filter: blur(0.05em);
-  margin: -0.25em calc(-0.1em + var(--kerning, 0px)) -0.25em -0.1em !important;
-  opacity: 0;
-  padding: 0.25em 0.1em;
-  scale: 2;
-  transform: translateZ(0) skew(15deg, 30deg);
-  translate: calc(var(--dx, 0.25) * 1em) calc(var(--dy, 1) * 1em);
-}
-
-/* Line reveal on inview */
-html.-loaded .-splitted.-inview .-s-line {
-  clip-path: inset(-10% 0 -10% 0);
-  transition: translate 1.5s var(--f-cubic), clip-path 1.5s var(--f-cubic);
-  transition-delay: calc(var(--line-index) * 75ms + var(--l-delay) * 0.15s);
-  translate: 0 0;
-}
-
-/* Char reveal on inview */
-html.-loaded .-lrg .-splitted.-inview .-s-char,
-html.-loaded .-lrg.-splitted.-inview .-s-char {
-  filter: blur(0);
-  opacity: 1;
-  scale: 1;
-  transform: translateZ(0) skew(0deg, 0deg);
+  transform: translateY(40px);
   transition:
-    opacity 1.5s var(--f-fast),
-    scale 1.5s var(--f-fast),
-    translate 1.5s var(--f-fast),
-    transform 1.5s var(--f-fast),
-    filter 1.5s var(--f-fast);
-  transition-delay: calc(var(--char-random) * 75ms);
-  translate: 0 0;
+    opacity 1.2s cubic-bezier(0.35, 0.35, 0, 1),
+    transform 1.2s cubic-bezier(0.35, 0.35, 0, 1);
 }
 
-/* ── Lazy load ── */
+.animate-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger delays via data attribute or nth-child */
+.animate-on-scroll[data-delay="1"] { transition-delay: 0.1s; }
+.animate-on-scroll[data-delay="2"] { transition-delay: 0.2s; }
+.animate-on-scroll[data-delay="3"] { transition-delay: 0.3s; }
+.animate-on-scroll[data-delay="4"] { transition-delay: 0.4s; }
+.animate-on-scroll[data-delay="5"] { transition-delay: 0.5s; }
+.animate-on-scroll[data-delay="6"] { transition-delay: 0.6s; }
+
+/* ── Variant: clip-path reveal (for headings) ── */
+.animate-on-scroll.anim-clip {
+  opacity: 0;
+  clip-path: inset(100% 0 0 0);
+  transform: translateY(20px);
+  transition:
+    opacity 1.5s cubic-bezier(0.35, 0.35, 0, 1),
+    clip-path 1.5s cubic-bezier(0.35, 0.35, 0, 1),
+    transform 1.5s cubic-bezier(0.35, 0.35, 0, 1);
+}
+
+.animate-on-scroll.anim-clip.is-visible {
+  opacity: 1;
+  clip-path: inset(0% 0 0 0);
+  transform: translateY(0);
+}
+
+/* ── Variant: scale reveal (for images) ── */
+.animate-on-scroll.anim-scale {
+  opacity: 0;
+  transform: scale(0.92);
+  transition:
+    opacity 1.5s cubic-bezier(0.35, 0.35, 0, 1),
+    transform 1.5s cubic-bezier(0.35, 0.35, 0, 1);
+}
+
+.animate-on-scroll.anim-scale.is-visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ── Variant: fade only (no movement) ── */
+.animate-on-scroll.anim-fade {
+  transform: none;
+  transition: opacity 1.5s cubic-bezier(0.35, 0.35, 0, 1);
+}
+
+.animate-on-scroll.anim-fade.is-visible {
+  opacity: 1;
+}
+
+/* ── Lazy load image fade ── */
 .lazyLoad {
   opacity: 0;
-  transform: translateZ(0);
-  transition: opacity 1.2s var(--f-cubic);
+  transition: opacity 1.2s cubic-bezier(0.35, 0.35, 0, 1);
 }
 .lazyLoad.-loaded {
   opacity: 1;
 }
 
-/* ── Page transition stripes ── */
-.page-transition {
-  background-color: rgba(var(--c-grey-rgb), 1);
-  height: calc(var(--vh, 1vh) * 100);
-  pointer-events: none;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 200;
-  transform: translateZ(0);
-}
-
-.page-transition .g {
-  background-color: transparent;
-  display: flex;
-  flex-direction: column;
-  inset: 0;
-  position: absolute;
-}
-
-.page-transition .g > span {
-  background-color: var(--c-black);
-  box-shadow: 0 0 0 1px var(--c-black);
-  display: block;
-  height: 25%;
-  scale: 1 1;
-  transform: translateZ(0);
-  width: 100%;
-}
-
-@media (min-width: 1024px) {
-  .page-transition .g > span {
-    background-color: var(--c-yellow);
-    box-shadow: 0 0 0 1px var(--c-yellow);
-  }
-}
-
-.page-transition .t {
-  color: var(--c-white);
-  display: grid;
-  inset: 50lvh 0 auto 0;
-  position: absolute;
-}
-
-.page-transition .t > span {
-  grid-area: 1/1;
-  justify-self: center;
-  overflow: hidden;
-}
-
-@media (min-width: 1024px) {
-  .page-transition .t {
-    color: var(--c-black);
-  }
-}
-
-/* Page transition enter */
+/* ── Page transitions (Vue) ── */
 .page-enter-active {
-  opacity: 0;
-  pointer-events: none;
-  position: absolute;
-  transition-duration: 1.2s;
+  transition: opacity 0.6s cubic-bezier(0.35, 0.35, 0, 1);
 }
-
 .page-leave-active {
-  transition-duration: 1.2s;
+  transition: opacity 0.4s cubic-bezier(0.35, 0.35, 0, 1);
 }
-
-.page-enter-from {
+.page-enter-from, .page-leave-to {
   opacity: 0;
-}
-
-.page-leave-to {
-  opacity: 0;
-}
-
-/* ── Repeat inview (for scroll-driven sections) ── */
-.-s-p-repeat:not(.-inview) .-splitted .-s-line {
-  clip-path: inset(0 0 100% 0);
-  transition-delay: 0s;
-  translate: 0 6em;
 }

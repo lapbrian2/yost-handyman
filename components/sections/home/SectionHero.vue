@@ -1,9 +1,8 @@
 <script setup lang="ts">
-const section = ref<HTMLElement | null>(null)
 </script>
 
 <template>
-  <section ref="section" class="c-hero">
+  <section class="c-hero">
     <!-- Background image -->
     <div class="hero-bg">
       <img src="/images/filler/hero.jpg" alt="" loading="eager">
@@ -12,9 +11,9 @@ const section = ref<HTMLElement | null>(null)
     <!-- Content -->
     <div class="hero-content -w">
       <div class="hero-text">
-        <span class="display-line line-1">Quality</span>
-        <span class="display-line line-2">Craftsmanship</span>
-        <span class="display-line line-3">Delivered</span>
+        <div class="line-wrap"><span class="display-line line-1">Quality</span></div>
+        <div class="line-wrap"><span class="display-line line-2">Craftsmanship</span></div>
+        <div class="line-wrap"><span class="display-line line-3">Delivered</span></div>
       </div>
 
       <div class="hero-meta">
@@ -41,11 +40,9 @@ const section = ref<HTMLElement | null>(null)
         <stop offset=".5" stop-color="#9FAF9B" />
         <stop offset="1" stop-color="#151415" />
       </linearGradient>
-      <path
-        fill="none" stroke="url(#hero-path-gradient)" stroke-width="1"
+      <path fill="none" stroke="url(#hero-path-gradient)" stroke-width="1"
         d="M859,0c513,94.4,377,448.9-79,595.4-424,136.3-685,299.7-263,484.6"
-        vector-effect="non-scaling-stroke"
-      />
+        vector-effect="non-scaling-stroke" />
     </svg>
 
     <!-- Bottom gradient fade -->
@@ -64,7 +61,6 @@ const section = ref<HTMLElement | null>(null)
   align-items: center;
 }
 
-/* Background */
 .hero-bg {
   inset: 0;
   position: absolute;
@@ -76,6 +72,12 @@ const section = ref<HTMLElement | null>(null)
   width: 100%;
   object-fit: cover;
   opacity: 0.3;
+  animation: heroBgReveal 2s cubic-bezier(0.35, 0.35, 0, 1) forwards;
+}
+
+@keyframes heroBgReveal {
+  from { opacity: 0; transform: scale(1.1); }
+  to { opacity: 0.3; transform: scale(1); }
 }
 
 /* Content */
@@ -86,13 +88,17 @@ const section = ref<HTMLElement | null>(null)
   padding-bottom: 10vh;
   display: flex;
   flex-direction: column;
-  gap: var(--h2);
+  gap: var(--h3);
 }
 
-/* Display text — stacked, no grid overlap */
+/* Display text with clip-path reveal */
 .hero-text {
   display: flex;
   flex-direction: column;
+}
+
+.line-wrap {
+  overflow: hidden;
 }
 
 .display-line {
@@ -101,15 +107,31 @@ const section = ref<HTMLElement | null>(null)
   line-height: 0.85;
   font-size: clamp(3rem, 10vw, 10rem);
   display: block;
+  animation: lineReveal 1.5s cubic-bezier(0.35, 0.35, 0, 1) forwards;
+  opacity: 0;
+  transform: translateY(100%) skewY(3deg);
 }
 
+.line-1 { animation-delay: 0.2s; }
 .line-2 {
+  animation-delay: 0.4s;
   margin-left: 0.5em;
   color: var(--c-yellow);
 }
-
 .line-3 {
+  animation-delay: 0.6s;
   margin-left: 1.5em;
+}
+
+@keyframes lineReveal {
+  from {
+    opacity: 0;
+    transform: translateY(100%) skewY(3deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) skewY(0deg);
+  }
 }
 
 /* Metadata */
@@ -117,13 +139,20 @@ const section = ref<HTMLElement | null>(null)
   display: flex;
   gap: var(--h2);
   color: rgba(var(--c-yellow-rgb), 0.5);
-  margin-top: var(--h5);
+  opacity: 0;
+  animation: fadeUp 1.2s cubic-bezier(0.35, 0.35, 0, 1) 1.0s forwards;
 }
 
 /* CTA */
 .hero-cta {
   max-width: 20rem;
-  margin-top: var(--h3);
+  opacity: 0;
+  animation: fadeUp 1.2s cubic-bezier(0.35, 0.35, 0, 1) 1.2s forwards;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .cta-label {
@@ -152,6 +181,13 @@ const section = ref<HTMLElement | null>(null)
   height: 100%;
   pointer-events: none;
   z-index: 5;
+  opacity: 0;
+  animation: fadeIn 3s ease 0.5s forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 /* Bottom fade */

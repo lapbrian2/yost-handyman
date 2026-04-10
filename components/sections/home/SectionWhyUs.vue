@@ -4,25 +4,25 @@
 <template>
   <section class="c-why-us">
     <div class="-w">
-      <div class="why-header anim-enter">
-        <h2 class="why-title anim-reveal">
+      <div class="why-header animate-on-scroll">
+        <h2 class="why-title animate-on-scroll anim-clip">
           <span>Why</span>
           <span>Choose</span>
           <span>Yost</span>
         </h2>
       </div>
 
-      <p class="why-subtitle -p-h6 anim-enter">
+      <p class="why-subtitle -p-h6 animate-on-scroll">
         Professional handyman services you can trust.
       </p>
 
-      <p class="why-body -m anim-enter">
+      <p class="why-body -m animate-on-scroll">
         With years of experience serving Saylorsburg and the surrounding Poconos area,
         we bring reliability, attention to detail, and honest pricing to every job.
         Licensed, insured, and committed to getting it right the first time.
       </p>
 
-      <div class="why-cta anim-enter">
+      <div class="why-cta animate-on-scroll">
         <span class="cta-label -hp">
           <span>Ready to</span>
           <span>Get Started? /</span>

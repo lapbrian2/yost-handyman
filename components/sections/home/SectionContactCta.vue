@@ -10,9 +10,9 @@ const form = reactive({
 <template>
   <section class="c-contact-cta">
     <div class="-w">
-      <h2 class="cta-title anim-reveal">Get Your<br>Free Estimate</h2>
+      <h2 class="cta-title animate-on-scroll anim-clip">Get Your<br>Free Estimate</h2>
 
-      <form @submit.prevent class="cta-form anim-fade-section">
+      <form @submit.prevent class="cta-form animate-on-scroll">
         <BaseInput v-model="form.name" name="name" label="Full" label-second="Name" placeholder="John Smith" required />
         <BaseInput v-model="form.phone" name="phone" label="Phone" placeholder="484-555-0123" type="tel" required />
         <BaseInput v-model="form.service" name="service" label="Service" label-second="Needed" placeholder="Deck repair, plumbing..." />

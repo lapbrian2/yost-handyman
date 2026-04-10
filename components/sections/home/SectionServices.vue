@@ -18,9 +18,9 @@ const prev = () => { currentSlide.value = (currentSlide.value - 1 + services.len
   <section class="c-services">
     <div class="-w">
       <!-- Title -->
-      <div class="services-header anim-enter">
-        <h2 class="services-title anim-reveal">Our Services</h2>
-        <span class="services-caption -h5 anim-enter">
+      <div class="services-header animate-on-scroll">
+        <h2 class="services-title animate-on-scroll anim-clip" data-delay="1">Our Services</h2>
+        <span class="services-caption -h5 animate-on-scroll" data-delay="2">
           <span>Craftsmanship</span>
           <span>You Can</span>
           <span>Count On</span>
@@ -28,7 +28,7 @@ const prev = () => { currentSlide.value = (currentSlide.value - 1 + services.len
       </div>
 
       <!-- Gallery -->
-      <div class="gallery anim-enter">
+      <div class="gallery animate-on-scroll anim-scale" data-delay="3">
         <div class="gallery-image">
           <Transition name="gallery-slide" mode="out-in">
             <img
