@@ -4,11 +4,11 @@
 <template>
   <section class="c-testimonials">
     <div class="-w">
-      <h2 class="test-title">Trusted</h2>
-      <span class="test-sub -h3">By Homeowners</span>
+      <h2 class="test-title anim-reveal">Trusted</h2>
+      <span class="test-sub -h3 anim-enter">By Homeowners</span>
 
-      <div class="quotes">
-        <blockquote class="quote-main">
+      <div class="quotes anim-stagger">
+        <blockquote class="quote-main anim-stagger-item">
           <p class="-h4">
             "I was amazed by the level of craftsmanship and attention to detail
             that Yost Handyman Services provided. They truly exceeded my expectations
@@ -17,7 +17,7 @@
           <cite class="-mm">-- Barbara S.</cite>
         </blockquote>
 
-        <blockquote class="quote-secondary">
+        <blockquote class="quote-secondary anim-stagger-item">
           <p class="-h5">
             "Fast, reliable, and the quality speaks for itself.
             Our deck looks brand new."

@@ -18,9 +18,9 @@ const prev = () => { currentSlide.value = (currentSlide.value - 1 + services.len
   <section class="c-services">
     <div class="-w">
       <!-- Title -->
-      <div class="services-header">
-        <h2 class="services-title">Our Services</h2>
-        <span class="services-caption -h5">
+      <div class="services-header anim-enter">
+        <h2 class="services-title anim-reveal">Our Services</h2>
+        <span class="services-caption -h5 anim-enter">
           <span>Craftsmanship</span>
           <span>You Can</span>
           <span>Count On</span>
@@ -28,16 +28,16 @@ const prev = () => { currentSlide.value = (currentSlide.value - 1 + services.len
       </div>
 
       <!-- Gallery -->
-      <div class="gallery">
+      <div class="gallery anim-enter">
         <div class="gallery-image">
-          <img
-            v-for="(service, i) in services"
-            v-show="i === currentSlide"
-            :key="service.name"
-            :src="service.img"
-            :alt="service.name"
-            loading="lazy"
-          >
+          <Transition name="gallery-slide" mode="out-in">
+            <img
+              :key="currentSlide"
+              :src="services[currentSlide].img"
+              :alt="services[currentSlide].name"
+              loading="lazy"
+            >
+          </Transition>
         </div>
 
         <div class="gallery-bottom">
@@ -116,6 +116,22 @@ const prev = () => { currentSlide.value = (currentSlide.value - 1 + services.len
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+/* Gallery slide transition */
+.gallery-slide-enter-active {
+  transition: clip-path 0.9s cubic-bezier(0.35, 0.35, 0, 1), transform 0.9s cubic-bezier(0.35, 0.35, 0, 1);
+}
+.gallery-slide-leave-active {
+  transition: clip-path 0.6s cubic-bezier(0.35, 0.35, 0, 1), transform 0.6s cubic-bezier(0.35, 0.35, 0, 1);
+}
+.gallery-slide-enter-from {
+  clip-path: inset(0 100% 0 0);
+  transform: scale(1.1);
+}
+.gallery-slide-leave-to {
+  clip-path: inset(0 0 0 100%);
+  transform: scale(0.95);
 }
 
 .gallery-bottom {
